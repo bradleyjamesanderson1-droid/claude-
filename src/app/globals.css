@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #161513;
+  --color-paper: #faf7f2;
+  --color-sage: #7a8b74;
+  --color-sage-deep: #5f7059;
+  --color-line: #e6e0d6;
+  --font-serif: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+html {
+  background: var(--color-paper);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-sage) 30%, transparent);
+}
+
+/* The single signature animation: archiving feels like relief, not destruction. */
+.archive-fade {
+  transition:
+    opacity 900ms ease,
+    transform 900ms ease,
+    max-height 700ms ease 300ms,
+    margin 700ms ease 300ms,
+    padding 700ms ease 300ms;
+}
+
+.archive-fade.archived {
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 0 !important;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+}
