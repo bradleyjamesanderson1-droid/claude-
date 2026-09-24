@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node --env-file-if-exists=.env server.js",
-    "check": "node --check server.js && node --check public/app.js && node --check public/avatar.js"
+    "check": "node --check server.js && node --check public/app.js && node --check public/avatar.js && node --check public/pomodoro.js",
+    "build:artifact": "python3 build-artifact.py"
   },
   "repository": {
     "type": "git",

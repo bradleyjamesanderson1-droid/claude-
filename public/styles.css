@@ -27,6 +27,7 @@
   --top: #2f6f73;
   --top-hi: #6fc2bd;
   --aura: #c67b5c;
+  --break: #3f8f7a;
   color-scheme: light;
 }
 
@@ -40,12 +41,13 @@
     --user: #2f2833;
     --accent: #e0916f;
     --aura: #6fc2bd;
+    --break: #7cc7b2;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #17141a; --panel: #211d24; --ink: #f1ebe6; --muted: #a99ea6;
-  --line: #342d37; --user: #2f2833; --accent: #e0916f; --aura: #6fc2bd;
+  --line: #342d37; --user: #2f2833; --accent: #e0916f; --aura: #6fc2bd; --break: #7cc7b2;
   color-scheme: dark;
 }
 
@@ -103,6 +105,7 @@ select {
 .bubble.assistant { align-self: flex-start; border: 1px solid var(--line); border-bottom-left-radius: 4px; }
 .bubble.assistant:empty::after { content: "…"; color: var(--muted); }
 .bubble.error { border-color: #d77; }
+.bubble.note { align-self: center; max-width: 100%; font-size: 13px; color: var(--muted); padding: 2px 8px; }
 
 .composer {
   display: flex; gap: 8px; align-items: flex-end; padding: 12px; border-top: 1px solid var(--line);
@@ -140,4 +143,36 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
   select { max-width: 120px; }
   .composer { gap: 6px; padding: 10px; }
   .pill { padding: 0 10px; font-size: 13px; }
+}
+
+/* pomodoro */
+.pomo { position: relative; display: flex; align-items: center; gap: 10px; width: max-content; max-width: 100%; margin: 2px auto 0; padding: 5px 6px 5px 5px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); }
+.pomo-ring { width: 40px; height: 40px; flex: none; }
+.pomo-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.pomo-track { fill: none; stroke: var(--line); stroke-width: 4; }
+.pomo-arc { fill: none; stroke: var(--accent); stroke-width: 4; stroke-linecap: round; transition: stroke-dashoffset 0.25s linear; }
+.pomo[data-phase="short"] .pomo-arc, .pomo[data-phase="long"] .pomo-arc { stroke: var(--break); }
+.pomo-main { min-width: 0; }
+.pomo-time { font-weight: 600; font-size: 20px; line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.pomo[data-running="false"] .pomo-time { color: var(--muted); }
+.pomo-meta { display: flex; gap: 8px; align-items: center; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.pomo-dots { display: inline-flex; gap: 3px; }
+.pomo-dots i { width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--muted); }
+.pomo-dots i.on { background: var(--accent); border-color: var(--accent); }
+.pomo-dots i.now { border-color: var(--accent); }
+.pomo-controls { display: flex; gap: 4px; }
+.pomo-btn { width: 34px; height: 34px; flex: none; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); display: grid; place-items: center; padding: 0; }
+.pomo-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.pomo-play { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.pomo-play svg path[d^="M7"] { fill: currentColor; }
+.pomo-settings { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%); z-index: 5; width: min(300px, calc(100vw - 32px)); display: grid; gap: 8px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14); font-size: 13px; }
+.pomo-settings label { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pomo-settings input[type="number"] { width: 64px; margin-left: auto; padding: 4px 6px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--ink); font: inherit; font-variant-numeric: tabular-nums; }
+.pomo-settings .pomo-check { justify-content: flex-start; }
+.pomo-save { justify-self: end; padding: 6px 14px; border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 820px) {
+  .pomo { gap: 8px; }
+  .pomo-ring { width: 34px; height: 34px; }
+  .pomo-time { font-size: 17px; }
+  .pomo-btn { width: 30px; height: 30px; }
 }

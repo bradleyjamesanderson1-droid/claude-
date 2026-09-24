@@ -1,4 +1,5 @@
 import { Avatar } from "./avatar.js";
+import { Pomodoro, pomodoroLine } from "./pomodoro.js";
 
 const $ = (s) => document.querySelector(s);
 const MOOD_TAG = /\[(neutral|happy|thinking|surprised|concerned|playful)\]\s*/gi;
@@ -87,6 +88,10 @@ const tts = {
     }
   },
 
+  announce(text) {
+    this.stop();
+    this.push(text);
+  },
   push(text) {
     const clean = text
       .replace(/https?:\/\/\S+/g, "the link")
@@ -132,6 +137,41 @@ if ("speechSynthesis" in window) {
 }
 
 // Mouth driver: a syllable-rate oscillation, kicked by word-boundary events.
+
+// ---------------------------------------------------------------- pomodoro
+let audioCtx = null;
+function chime(kind) {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+    const notes = { start: [523.25, 783.99], stop: [783.99, 659.25, 523.25], warn: [659.25] }[kind];
+    if (!notes) return;
+    notes.forEach((f, i) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      const t0 = audioCtx.currentTime + i * 0.18;
+      o.type = "sine";
+      o.frequency.value = f;
+      g.gain.setValueAtTime(0, t0);
+      g.gain.linearRampToValueAtTime(0.18, t0 + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, t0 + 0.6);
+      o.connect(g).connect(audioCtx.destination);
+      o.start(t0);
+      o.stop(t0 + 0.65);
+    });
+  } catch {}
+}
+
+const pomo = new Pomodoro($("#pomo-slot"), {
+  onEvent(e) {
+    const line = pomodoroLine(e);
+    if (!line) return;
+    const kind = e.type === "stop" ? (e.running && e.phase === "focus" ? "start" : "stop") : e.type === "resume" ? "start" : e.type;
+    chime(kind);
+    avatar.setMood(line.mood);
+    addBubble("note", line.text.replace(MOOD_TAG, ""));
+    tts.announce(line.text.replace(MOOD_TAG, ""));
+  },
+});
 
 // ---------------------------------------------------------------------------
 // Speech input

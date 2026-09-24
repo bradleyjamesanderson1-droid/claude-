@@ -5,11 +5,12 @@ An animated character you talk to by voice or text. She's a front end for Claude
 - **Animated face**: an SVG character drawn in code. She breathes, blinks, follows your cursor, looks away while she thinks, and her mouth moves with her voice. Claude picks her expression on every reply (happy, thinking, surprised, concerned, playful).
 - **Voice in and out**: tap the mic, or turn on **Talk mode** for hands-free back-and-forth. She starts speaking as soon as the first sentence arrives. Tap her or press Esc to interrupt.
 - **Text**: the chat panel shows the full conversation and works without voice.
+- **Pomodoro timer**: a focus/break timer under the character. Aria says "Start!" and "Stop!" at every change, with a chime and a one-minute warning. Lengths, the number of sessions before a long break, and auto-start are in the gear menu. In the claude.ai version you can also just ask her ("start a pomodoro", "make breaks ten minutes", "how long is left?").
 - **Tools**: Claude calls your MCP servers directly through the API's MCP connector, and a chip shows which tool she's using. She's told to ask before sending, deleting, booking or sharing anything.
 
 ## Hosted version (no setup)
 
-`artifact/aria.html` is Aria as a claude.ai page. She uses Claude through your own claude.ai account and calls your claude.ai connectors directly (Gmail, Google Calendar, Google Drive, Notion), so no API key or tokens are needed. She can read and search, and she can save Gmail drafts, but she can't send anything. claude.ai pages block the microphone, so this version takes typed messages and answers out loud. For voice input, run the local version below.
+`artifact/aria.html` is Aria as a claude.ai page, built from `artifact/template.html` plus the shared `public/avatar.js` and `public/pomodoro.js` by `npm run build:artifact`. She uses Claude through your own claude.ai account and calls your claude.ai connectors directly (Gmail, Google Calendar, Google Drive, Notion), so no API key or tokens are needed. She can read and search, and she can save Gmail drafts, but she can't send anything. claude.ai pages block the microphone, so this version takes typed messages and answers out loud. For voice input, run the local version below.
 
 ## Quick start
 
