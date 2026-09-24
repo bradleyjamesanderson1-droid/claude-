@@ -67,7 +67,6 @@ function authHeaders() {
 const tts = {
   queue: [],
   speaking: false,
-  pulse: 0,
   voice: null,
 
   pickVoice() {
@@ -113,8 +112,9 @@ const tts = {
     if (this.voice) u.voice = this.voice;
     u.rate = 1.03;
     u.pitch = 1.08;
-    u.onboundary = () => (this.pulse = 1);
-    u.onend = u.onerror = () => this.next();
+    u.onstart = () => avatar.speakStart(text, u.rate);
+    u.onboundary = (e) => avatar.speakSync(e.charIndex);
+    u.onend = u.onerror = () => { avatar.speakEnd(); this.next(); };
     speechSynthesis.speak(u);
   },
 
@@ -122,7 +122,7 @@ const tts = {
     this.queue = [];
     this.speaking = false;
     if ("speechSynthesis" in window) speechSynthesis.cancel();
-    avatar.setMouth(0);
+    avatar.speakEnd();
   },
 };
 
@@ -132,14 +132,6 @@ if ("speechSynthesis" in window) {
 }
 
 // Mouth driver: a syllable-rate oscillation, kicked by word-boundary events.
-(function mouthLoop(t) {
-  if (tts.speaking) {
-    tts.pulse *= 0.9;
-    const syllable = Math.abs(Math.sin(t / 85)) * 0.55 + Math.abs(Math.sin(t / 47)) * 0.2;
-    avatar.setMouth(0.12 + syllable * 0.7 + tts.pulse * 0.25);
-  }
-  requestAnimationFrame(mouthLoop);
-})(0);
 
 // ---------------------------------------------------------------------------
 // Speech input
