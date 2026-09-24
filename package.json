@@ -1,0 +1,26 @@
+{
+  "name": "claude-companion",
+  "version": "1.0.0",
+  "description": "Animated voice + text companion that fronts Claude and your MCP-connected tools",
+  "main": "server.js",
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.js",
+    "check": "node --check server.js && node --check public/app.js && node --check public/avatar.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradleyjamesanderson1-droid/claude-.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bradleyjamesanderson1-droid/claude-/issues"
+  },
+  "homepage": "https://github.com/bradleyjamesanderson1-droid/claude-#readme",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  }
+}

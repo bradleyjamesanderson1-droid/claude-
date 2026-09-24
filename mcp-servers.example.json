@@ -1,0 +1,33 @@
+{
+  "servers": [
+    {
+      "name": "github",
+      "label": "GitHub",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "authorization_token": "${GITHUB_MCP_TOKEN}",
+      "enabled": false
+    },
+    {
+      "name": "notion",
+      "label": "Notion",
+      "url": "https://mcp.notion.com/mcp",
+      "authorization_token": "${NOTION_MCP_TOKEN}",
+      "enabled": false
+    },
+    {
+      "name": "gmail",
+      "label": "Gmail",
+      "url": "https://YOUR-GMAIL-MCP-SERVER/mcp",
+      "authorization_token": "${GMAIL_MCP_TOKEN}",
+      "allowed_tools": ["search_threads", "get_thread", "create_draft"],
+      "enabled": false
+    },
+    {
+      "name": "calendar",
+      "label": "Google Calendar",
+      "url": "https://YOUR-CALENDAR-MCP-SERVER/mcp",
+      "authorization_token": "${GCAL_MCP_TOKEN}",
+      "enabled": false
+    }
+  ]
+}
