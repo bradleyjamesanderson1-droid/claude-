@@ -7,6 +7,10 @@ An animated character you talk to by voice or text. She's a front end for Claude
 - **Text**: the chat panel shows the full conversation and works without voice.
 - **Tools**: Claude calls your MCP servers directly through the API's MCP connector, and a chip shows which tool she's using. She's told to ask before sending, deleting, booking or sharing anything.
 
+## Hosted version (no setup)
+
+`artifact/aria.html` is Aria as a claude.ai page. She uses Claude through your own claude.ai account and calls your claude.ai connectors directly (Gmail, Google Calendar, Google Drive, Notion), so no API key or tokens are needed. She can read and search, and she can save Gmail drafts, but she can't send anything. claude.ai pages block the microphone, so this version takes typed messages and answers out loud. For voice input, run the local version below.
+
 ## Quick start
 
 ```bash
