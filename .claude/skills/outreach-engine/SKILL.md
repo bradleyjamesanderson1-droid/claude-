@@ -56,12 +56,17 @@ and ask before drafting anything.
    `cold-email-writer` drafts each email into Gmail and sets the row to `Drafted`.
 6. **Calls:** for any call booked for tomorrow, run `call-prep` to put a one-page brief on the
    prospect's Notion row.
-7. **Morning digest** (the final message of the run, which the routine push-notifies):
+7. **Free-site track (if `free_site_play: true` in `facts.md`):** run `local-prospector` for the
+   configured category and area until there are `free_sites_per_night` (default 5) new no-website
+   businesses, then run `site-builder` on each in parallel. Add them to the digest as a **call
+   list** with the phone number, site path and the one detail to mention (see `free-site-offer`).
+8. **Morning digest** (the final message of the run, which the routine push-notifies):
    ```
    Outreach — <date>
    ✉ <n> new drafts ready (first touch <a>, follow-up <b>) — open Gmail drafts
    ↩ <n> replies: <x> want to talk, <y> asked price, <z> no, <w> other — reply drafts ready
    📅 Calls tomorrow: <names + times>
+   📞 Free-site call list: <n> sites built — <name, phone> …
    ⚠ Needs you: <anything unusual>
    ```
 

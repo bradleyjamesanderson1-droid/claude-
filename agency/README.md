@@ -57,3 +57,11 @@ book the call (never send the price) → brief before each call.
 The agents are given Gmail's **draft** tool but not its send or reply tools, so nothing goes out
 without you. Fill in `facts.md` first: the run stops if `compliance_rule` is empty.
 The pipeline lives in a Notion database, **Outreach Pipeline**, created during setup.
+
+## The free-site play (local businesses with no website)
+
+`/free-site-offer`: find them on Maps (`local-prospector`), build the site first
+(`/website-builder` or the `site-builder` agent, which makes one self-contained `index.html`), call
+("I couldn't find your site, want one, free? Just leave me a testimonial"), hand over and host it,
+collect the testimonial, then offer paid services. Sites live in `sites/<slug>/`. With
+`free_site_play: true` in `facts.md`, the nightly run builds sites and adds a call list to your digest.

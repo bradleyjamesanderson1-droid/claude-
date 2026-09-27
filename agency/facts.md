@@ -8,6 +8,12 @@ compliance_rule:              # REQUIRED, your rule under POPIA s69 / other laws
                               # "single request-for-interest email; opt-out line on every email; no personal addresses"
 optout_line:                  # e.g. "Not relevant? Reply 'no' and I won't email again."
 
+## Free-site play (local businesses without a website)
+free_site_play: false
+free_site_categories:         # e.g. "plumbers, panel beaters"
+free_site_areas:              # e.g. "Centurion, Pretoria East"
+free_sites_per_night: 5
+
 ## Sender
 sender_name:
 sender_title:
