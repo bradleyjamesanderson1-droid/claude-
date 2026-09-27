@@ -13,6 +13,7 @@ import { txt, floatText } from '../ui/text.js';
 import { button, Menu } from '../ui/button.js';
 import { tweenColour } from '../ui/colour.js';
 import { sfx } from '../ui/sfx.js';
+import { playMusic } from '../ui/music.js';
 import { FRIEND_NAME } from '../data/script.js';
 import { maxStamina, useRootvein, STATUS } from '../state/ledger.js';
 
@@ -26,7 +27,7 @@ export default class SkirmishScene extends EncounterBase {
   create() {
     const climax = this.cfg.mode === 'climax';
     this.climax = climax;
-    this.setupWorld({ width: climax ? 384 : 720, bg: this.cfg.bg || 'thorns', act: !climax });
+    this.setupWorld({ width: climax ? 384 : 720, bg: this.cfg.bg || 'thorns', act: !climax, music: climax ? 'climax' : 'skirmish' });
     this.enemies = [];
     this.allies = [];
     this.spawned = 0;
@@ -280,6 +281,8 @@ export default class SkirmishScene extends EncounterBase {
     useRootvein(this.state);
     this.rootveinActive = true;
     this.activeBerries = {}; // it doesn't need them
+    // The music cuts out. What's left is the hush and the ease of it.
+    playMusic(null);
     sfx('rootvein');
     tweenColour(this, from, this.state.colour, 2200);
     this.player.setTint(0x7a6a78);

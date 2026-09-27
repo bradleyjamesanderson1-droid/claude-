@@ -7,6 +7,7 @@ import { getState, save } from '../state/store.js';
 import { driftColour } from '../state/ledger.js';
 import { BALANCE } from '../config.js';
 import { goto } from '../ui/nav.js';
+import { playMusic } from '../ui/music.js';
 import { resolveVulnerable } from '../data/vulnerable.js';
 
 /**
@@ -31,6 +32,8 @@ export default class EndingScene extends Phaser.Scene {
     applyColour(this);
     this.cameras.main.fadeIn(1500);
     const rv = this.path === 'rootvein';
+    // Rootvein ending: silence, no triumph (brief §7). Refusal: quiet and warm.
+    playMusic(rv ? null : 'regroup');
 
     addBackdrop(this, rv ? 'blight-deep' : 'campfire', { y: 40, height: 180, scroll: false });
     this.add.rectangle(0, 0, W, 40, 0x000000).setOrigin(0);

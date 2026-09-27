@@ -4,6 +4,7 @@ import { button, Menu } from '../ui/button.js';
 import { restoreCheckpoint } from '../state/store.js';
 import { Director } from '../flow.js';
 import { goto } from '../ui/nav.js';
+import { playMusic } from '../ui/music.js';
 
 /** Rusty at zero stamina outside the climax: the run ends. Retry from the landmark. */
 export default class GameOverScene extends Phaser.Scene {
@@ -15,6 +16,7 @@ export default class GameOverScene extends Phaser.Scene {
     const W = this.scale.width;
     const H = this.scale.height;
     this.cameras.main.fadeIn(400);
+    playMusic(null);
     this.add.sprite(W / 2, H / 2 - 60, 'rusty').setScale(3).play('rusty-down');
     txt(this, W / 2, H / 2 - 20, 'Rusty collapses.', { origin: 0.5, color: '#ffd060' });
     txt(this, W / 2, H / 2 + 6, 'He spent more than he had. The ledger always comes due.', {

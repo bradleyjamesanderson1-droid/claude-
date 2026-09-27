@@ -6,6 +6,7 @@ import { applyColour } from '../ui/colour.js';
 import { PartyPanel } from '../ui/partyPanel.js';
 import { resolveCollapses } from '../ui/collapse.js';
 import { sfx } from '../ui/sfx.js';
+import { playMusic } from '../ui/music.js';
 import { getState, save } from '../state/store.js';
 import { LANDMARKS } from '../data/landmarks.js';
 import { COMPANIONS, ROSTER_ORDER } from '../data/companions.js';
@@ -29,6 +30,7 @@ export default class TrailScene extends Phaser.Scene {
     const s = getState();
     applyColour(this);
     this.cameras.main.fadeIn(250);
+    playMusic(s.landmark >= BALANCE.blightFrom ? 'trailDark' : 'trail');
     this.add.rectangle(0, 0, W, H, 0x1a1410).setOrigin(0).setDepth(-20);
 
     const lm = LANDMARKS[s.landmark];

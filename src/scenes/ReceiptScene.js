@@ -4,6 +4,7 @@ import { button, Menu } from '../ui/button.js';
 import { applyColour } from '../ui/colour.js';
 import { resolveCollapses } from '../ui/collapse.js';
 import { sfx } from '../ui/sfx.js';
+import { playMusic } from '../ui/music.js';
 import { getState, save } from '../state/store.js';
 import { ravenousEat, addBerries } from '../state/ledger.js';
 import { COMPANIONS, BERRY_INFO } from '../data/companions.js';
@@ -30,6 +31,7 @@ export default class ReceiptScene extends Phaser.Scene {
     const r = this.result;
     applyColour(this);
     this.cameras.main.fadeIn(250);
+    playMusic(s.rootveinUsed ? null : 'story');
 
     txt(this, W / 2, 14, r.title || 'After', { origin: 0.5, color: '#ffe6a8' });
     txt(this, W / 2, 28, 'THE LEDGER', { origin: 0.5, color: '#a89a84' });

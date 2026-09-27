@@ -5,6 +5,7 @@ import { addBackdrop } from '../ui/backdrop.js';
 import { applyColour } from '../ui/colour.js';
 import { staminaColor } from '../ui/partyPanel.js';
 import { sfx } from '../ui/sfx.js';
+import { playMusic } from '../ui/music.js';
 import { getState, save } from '../state/store.js';
 import { drawCost, drainRate, takeBerry, spend, eatMeal, rest, maxStamina } from '../state/ledger.js';
 import { BALANCE } from '../config.js';
@@ -24,6 +25,7 @@ export default class HollowScene extends Phaser.Scene {
     const H = this.scale.height;
     applyColour(this);
     this.cameras.main.fadeIn(250);
+    playMusic('hollow');
     addBackdrop(this, 'hollow', { y: 0, height: 150, scroll: false });
     this.add.tileSprite(0, 134, W, 16, 'ground-hollow').setOrigin(0);
     this.add.rectangle(0, 150, W, H - 150, 0x1a1410).setOrigin(0);

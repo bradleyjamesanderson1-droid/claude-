@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import '@fontsource/press-start-2p/latin-400.css';
 import { PORTRAIT } from './config.js';
 import { initOrientation } from './ui/orientation.js';
+import { audio } from './ui/sfx.js';
+import { currentTrack } from './ui/music.js';
 import * as store from './state/store.js';
 import { Director } from './flow.js';
 import { goto } from './ui/nav.js';
@@ -27,6 +29,10 @@ async function start() {
     /* fall back to monospace */
   }
   initOrientation();
+  // Browsers only start audio after a user gesture.
+  const unlock = () => audio();
+  addEventListener('pointerdown', unlock, { once: true });
+  addEventListener('keydown', unlock, { once: true });
   const game = new Phaser.Game({
     type: Phaser.AUTO,
     parent: 'game',
@@ -55,7 +61,7 @@ async function start() {
     ],
   });
   // Handy for debugging and the automated smoke test (scripts/smoke.mjs).
-  window.__wr = { game, store, Director, goto };
+  window.__wr = { game, store, Director, goto, currentTrack };
 }
 
 start();

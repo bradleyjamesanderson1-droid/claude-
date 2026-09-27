@@ -10,6 +10,7 @@ import { addBackdrop } from '../ui/backdrop.js';
 import { applyColour } from '../ui/colour.js';
 import { staminaColor } from '../ui/partyPanel.js';
 import { sfx } from '../ui/sfx.js';
+import { playMusic } from '../ui/music.js';
 import { getState, save } from '../state/store.js';
 import { drawCost, drainRate, takeBerry, spend, maxStamina, STATUS } from '../state/ledger.js';
 import { Director } from '../flow.js';
@@ -44,7 +45,8 @@ export default class EncounterBase extends Phaser.Scene {
   // ---- setup -------------------------------------------------------------------
 
   /** Subclasses call this first in create(). */
-  setupWorld({ width, bg, berries = true, staff = true, act = false }) {
+  setupWorld({ width, bg, berries = true, staff = true, act = false, music = 'skirmish' }) {
+    playMusic(music);
     const H = this.scale.height;
     this.worldW = width;
     this.canBerry = berries && !!this.state.flags.berrycraft;

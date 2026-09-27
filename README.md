@@ -4,7 +4,7 @@ A browser game adaptation of *The Woodland Rebellion*: an Oregon Trail-style jou
 with short 8-bit side-scroller encounters. V1 covers Acts I–II, **Ch. 2 (Founding Day)
 through Ch. 12 (Price of the Shortcut)**, opening on a short, non-interactive Ch. 1 cold open.
 
-Built with **Phaser 3** + Vite. It's a single responsive web build for desktop and mobile
+Built with **Phaser 3** + Vite, with procedural chiptune music (no audio files). It's a single responsive web build for desktop and mobile
 browsers, and progress saves in the browser (localStorage).
 
 ```bash

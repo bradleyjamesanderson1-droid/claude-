@@ -26,7 +26,7 @@ const info = () =>
     const { game, store } = window.__wr;
     const sc = game.scene.getScenes(true)[0];
     const s = store.getState();
-    return { key: sc?.scene.key, lm: s.landmark, step: s.step, phase: s.phase, food: s.food, rusty: Math.round(s.party.rusty.stamina), modal: !!sc?.modal, busy: !!sc?.busy, ended: !!sc?.ended };
+    return { music: window.__wr.currentTrack(), key: sc?.scene.key, lm: s.landmark, step: s.step, phase: s.phase, food: s.food, rusty: Math.round(s.party.rusty.stamina), modal: !!sc?.modal, busy: !!sc?.busy, ended: !!sc?.ended };
   });
 
 let last = '';
@@ -35,7 +35,7 @@ for (let i = 0; i < 3000; i++) {
   const st = await info();
   const sig = `${st.key}:${st.lm}:${st.step}`;
   if (sig !== last) {
-    trail.push(`${sig} (food ${st.food}, rusty ${st.rusty})`);
+    trail.push(`${sig} (food ${st.food}, rusty ${st.rusty}, music ${st.music})`);
     last = sig;
   }
   if (st.key === 'Ending') break;

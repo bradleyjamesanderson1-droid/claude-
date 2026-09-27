@@ -4,6 +4,7 @@ import { button, Menu } from '../ui/button.js';
 import { addBackdrop } from '../ui/backdrop.js';
 import { hasSave, load, startNew } from '../state/store.js';
 import { toggleMute, isMuted } from '../ui/sfx.js';
+import { playMusic } from '../ui/music.js';
 import { Director } from '../flow.js';
 import { PORTRAIT } from '../config.js';
 import { wantOrientation } from '../ui/orientation.js';
@@ -19,6 +20,7 @@ export default class TitleScene extends Phaser.Scene {
     const W = this.scale.width;
     const H = this.scale.height;
     this.cameras.main.fadeIn(300);
+    playMusic('trail');
     addBackdrop(this, 'grove', { y: 0, height: 216 });
     this.add.rectangle(0, 216, W, H - 216, 0x1a1410).setOrigin(0);
     this.add.tileSprite(0, 200, W, 16, 'ground-grove').setOrigin(0);

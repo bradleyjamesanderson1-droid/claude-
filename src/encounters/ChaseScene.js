@@ -17,7 +17,7 @@ export default class ChaseScene extends EncounterBase {
   create() {
     const dur = this.cfg.duration || 60;
     const width = Math.round(SCROLL * dur + 500);
-    this.setupWorld({ width, bg: 'grove-night', berries: false, staff: false });
+    this.setupWorld({ width, bg: 'grove-night', berries: false, staff: false, music: 'chase' });
     this.controls.buttons.staff && (this.controls.buttons.staff.r.setVisible(false), this.controls.buttons.staff.t.setVisible(false));
     this.cameras.main.stopFollow();
     this.camX = 0;

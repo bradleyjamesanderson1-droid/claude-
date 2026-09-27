@@ -148,3 +148,17 @@ test('Colour never appears in any UI text', async () => {
     assert.ok(!/setText\([^)]*colour/i.test(src), `${f} renders colour`);
   }
 });
+
+test('every music track parses into valid notes and drums', async () => {
+  const { TRACKS, parse, noteFreq } = await import('../src/ui/music.js');
+  for (const [name, t] of Object.entries(TRACKS)) {
+    assert.ok(t.bpm > 0, name);
+    for (const v of t.voices) {
+      const toks = parse(v.notes);
+      assert.ok(toks.length > 0, name);
+      for (const tok of toks) assert.ok(tok === '.' || tok === '-' || noteFreq(tok) > 20, `${name}: bad note ${tok}`);
+    }
+    if (t.drums) for (const d of parse(t.drums)) assert.ok('.ksh'.includes(d), `${name}: bad drum ${d}`);
+  }
+  assert.equal(Math.round(noteFreq('A4')), 440);
+});

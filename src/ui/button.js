@@ -51,9 +51,11 @@ export class Menu {
     this.columns = columns;
     this.index = 0;
     this.active = true;
-    const k = scene.input.keyboard;
+    // Raw DOM events, not Phaser's keyboard plugin: the plugin drops a keydown
+    // for a key it believes is still held (e.g. a direction key held in a fight
+    // when a modal menu pops up).
     this.handler = (ev) => {
-      if (!this.active || !this.buttons.some((b) => b.visible)) return;
+      if (ev.repeat || !this.active || !this.buttons.some((b) => b.visible)) return;
       const key = ev.key;
       if (['ArrowDown', 's', 'S'].includes(key)) this.move(this.columns);
       else if (['ArrowUp', 'w', 'W'].includes(key)) this.move(-this.columns);
@@ -61,8 +63,8 @@ export class Menu {
       else if (['ArrowLeft', 'a', 'A'].includes(key) && this.columns > 1) this.move(-1);
       else if (key === 'Enter' || key === ' ') this.buttons[this.index]?.press();
     };
-    k.on('keydown', this.handler);
-    scene.events.once('shutdown', () => k.off('keydown', this.handler));
+    window.addEventListener('keydown', this.handler);
+    scene.events.once('shutdown', () => this.destroy());
     this.refresh();
   }
   move(d) {
@@ -85,6 +87,6 @@ export class Menu {
   }
   destroy() {
     this.active = false;
-    this.scene.input.keyboard.off('keydown', this.handler);
+    window.removeEventListener('keydown', this.handler);
   }
 }

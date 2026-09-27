@@ -4,6 +4,7 @@ import { button, Menu } from '../ui/button.js';
 import { addBackdrop } from '../ui/backdrop.js';
 import { applyColour } from '../ui/colour.js';
 import { sfx } from '../ui/sfx.js';
+import { playMusic } from '../ui/music.js';
 import { SCRIPTS, SPEAKERS, BG_NAMES, FRIEND_NAME } from '../data/script.js';
 import { COMPANIONS } from '../data/companions.js';
 import { resolveVulnerable } from '../data/vulnerable.js';
@@ -13,6 +14,7 @@ import { Director } from '../flow.js';
 import { SPRITES } from '../art/manifest.js';
 
 const STAGE_H = 216;
+const DARK_BGS = new Set(['grove-dusk', 'grove-night', 'ash', 'blight', 'blight-deep', 'cache', 'council']);
 const COLD_BELOW = 0.7; // hidden Colour threshold where warm lines turn cold
 
 export default class StoryScene extends Phaser.Scene {
@@ -85,6 +87,9 @@ export default class StoryScene extends Phaser.Scene {
     this.bg = addBackdrop(this, key, { y: 0, height: STAGE_H, scroll: false });
     this.ground = this.add.tileSprite(0, STAGE_H - 16, this.scale.width, 16, `ground-${key in BG_NAMES ? key : 'forest'}`).setOrigin(0).setDepth(-5);
     this.placeText.setText(BG_NAMES[key] || '');
+    // After Rootvein, nothing plays. Otherwise the backdrop sets the mood.
+    if (getState().rootveinUsed) playMusic(null);
+    else playMusic(DARK_BGS.has(key) ? 'dark' : 'story');
   }
 
   show(ids) {

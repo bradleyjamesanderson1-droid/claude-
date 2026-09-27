@@ -1,9 +1,9 @@
 # Dialogue for review
 
-Every line in `src/data/script.js` is a draft. These are the lines that most need Bradley's
+Every line in `src/data/script.js` is a placeholder draft, and that's approved for now. The Ch. 12 line is approved as written. These are the lines that most need Bradley's
 eye before they're treated as final. They're tone-sensitive, or they touch the hard constraints.
 
-## The Ch. 12 cold / cruel aftermath line (brief §7, §10)
+## The Ch. 12 cold / cruel aftermath line (brief §7, §10): APPROVED
 
 Current (`ch12_rootvein`), said to the vulnerable one ({V} = Kit by default):
 

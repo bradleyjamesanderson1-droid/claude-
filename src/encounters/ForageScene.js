@@ -16,7 +16,7 @@ export default class ForageScene extends EncounterBase {
   create() {
     const light = !!this.cfg.light;
     const width = light ? 1300 : 1700;
-    this.setupWorld({ width, bg: this.cfg.bg || 'grove', staff: false });
+    this.setupWorld({ width, bg: this.cfg.bg || 'grove', staff: false, music: 'forage' });
     this.controls.buttons.staff && (this.controls.buttons.staff.r.setVisible(false), this.controls.buttons.staff.t.setVisible(false));
 
     const rng = new Phaser.Math.RandomDataGenerator([String(this.state.landmark), 'forage']);

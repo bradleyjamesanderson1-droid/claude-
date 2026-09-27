@@ -1,4 +1,4 @@
-// Tiny WebAudio blips. No music in V1 (the Rootvein ending is deliberately silent).
+// Tiny WebAudio blips. Music lives in music.js and shares this AudioContext.
 let ctx = null;
 let muted = false;
 
@@ -8,7 +8,7 @@ try {
   /* ignore */
 }
 
-function audio() {
+export function audio() {
   if (!ctx) {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;
@@ -53,8 +53,12 @@ export function sfx(name) {
   }
 }
 
+const muteListeners = [];
+export const onMuteChange = (fn) => muteListeners.push(fn);
+
 export function toggleMute() {
   muted = !muted;
+  muteListeners.forEach((fn) => fn(muted));
   try {
     localStorage.setItem('wr-muted', muted ? '1' : '0');
   } catch {

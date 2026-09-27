@@ -1,5 +1,17 @@
 # Open notes: flagged back for decision
 
+## Decisions (Sep 27, 2026)
+
+| Item | Decision |
+|---|---|
+| Ch. 12 cold line | **Approved as written.** |
+| Draft dialogue | Current lines stay as placeholders for now. |
+| Friend name `Burr`, Ch. 7 rescue frees the friend | Fine as is. |
+| Protect encounter at landmark 9 | Keep. |
+| Kit vs. Chipper config | Fine (`VULNERABLE_ID`). |
+| Balance numbers | Keep as starting values and adjust in playtesting. |
+| Music | **Added**: chiptune tracks in `src/ui/music.js`. |
+
 These are the brief's §10 items, plus things I had to decide to make V1 playable.
 None of them is locked.
 
@@ -72,9 +84,25 @@ young one. Nothing hard-codes Kit.
 - The Protect encounter type and the crawlers.
 - Bandit carrying a Rootvein bundle into Ch. 12, which is how the offer reaches Rusty mid-fight.
 
-## 7. Not in V1 (by design)
+## 7. Music
 
-- No music. The Rootvein ending is deliberately silent, and there are only small WebAudio
-  blips elsewhere.
+There are no audio files. `src/ui/music.js` holds small chiptune loops written as note text,
+played by a WebAudio step sequencer. Each track is a few lines, so it's easy to rewrite or replace.
+
+| Where | Track |
+|---|---|
+| Title, trail (landmarks 1–4) | `trail`: warm, major |
+| Trail from landmark 5 | `trailDark`: the same idea in minor, as the blight spreads |
+| Story beats | `story` (calm arpeggio), or `dark` on night, blight, ash, cache and Council backdrops |
+| Mosswhisker's Hollow | `hollow`: folk |
+| Forage / chase / rescue and Protect / climax | `forage` / `chase` / `skirmish` / `climax` |
+| Refuse ending | `regroup`: quiet and warm |
+| **Rootvein**: the moment it's used, the aftermath, and the ending | **silence**. The music cuts out mid-fight and never comes back in that run. |
+| Game over | silence |
+
+The Sound toggle on the title screen mutes both music and effects.
+
+## 8. Not in V1 (by design)
+
 - Whisper berries exist in the pouch and turn up in forage, but no V1 companion uses them.
 - Nothing from Ch. 13–27. No third "Chip sacrifices herself" branch.
