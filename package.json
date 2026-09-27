@@ -1,6 +1,6 @@
 {
   "name": "woodland-rebellion",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "The Woodland Rebellion — V1 browser game (Acts I–II, Ch. 2–12)",
   "scripts": {
     "dev": "vite",

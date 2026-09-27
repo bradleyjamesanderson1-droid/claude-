@@ -79,8 +79,10 @@ export default class EndingScene extends Phaser.Scene {
       this.tweens.add({ targets: t, alpha: 1, delay: 1200 + n * 1800, duration: 1400 });
     });
     this.time.delayedCall(1200 + lines.length * 1800 + 800, () => {
-      const b = button(this, W / 2 - 60, this.scale.height - 30, 120, 22, 'Title', () => goto(this, 'Title'));
-      new Menu(this, [b]);
+      const H = this.scale.height;
+      const b = button(this, W / 2 - 98, H - 30, 92, 22, 'Title', () => goto(this, 'Title'));
+      const f = button(this, W / 2 + 6, H - 30, 92, 22, 'Feedback', () => goto(this, 'Feedback'));
+      new Menu(this, [b, f], { columns: 2 });
     });
   }
 }

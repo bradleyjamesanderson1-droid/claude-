@@ -11,6 +11,7 @@
 | Kit vs. Chipper config | Fine (`VULNERABLE_ID`). |
 | Balance numbers | Keep as starting values and adjust in playtesting. |
 | Music | **Added**: chiptune tracks in `src/ui/music.js`. |
+| Test run | Hosted on GitHub Pages; added version stamp, feedback, tester notes, chapter select and a save-version check. |
 
 These are the brief's §10 items, plus things I had to decide to make V1 playable.
 None of them is locked.

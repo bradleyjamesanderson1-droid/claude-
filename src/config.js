@@ -12,6 +12,28 @@ export const FONT = '"Press Start 2P", monospace';
 
 export const SAVE_KEY = 'woodland-rebellion-v1';
 
+// Bump this whenever a change would break saves from an older build (renamed
+// state fields, reordered landmark steps, ...). Older saves are then refused
+// with a clear message on the title screen instead of loading into a broken run.
+export const SAVE_VERSION = 1;
+
+// Test builds show the chapter select. Turn off for a public launch.
+export const TEST_BUILD = true;
+
+// Where the in-game Feedback button sends testers. Set ONE of these:
+//   url:   a form (e.g. a Google Form). The report is copied to the clipboard first.
+//   email: an address. The report opens pre-filled in the tester's mail app.
+// Left empty, testers get "Copy report" and their device's Share sheet.
+export const FEEDBACK = { url: '', email: '' };
+
+// Injected at build time by vite.config.js.
+/* global __APP_VERSION__, __BUILD_SHA__, __BUILD_DATE__ */
+export const BUILD = {
+  version: typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : 'dev',
+  sha: typeof __BUILD_SHA__ !== 'undefined' ? __BUILD_SHA__ : 'local',
+  date: typeof __BUILD_DATE__ !== 'undefined' ? __BUILD_DATE__ : '',
+};
+
 // Open question in the book (brief §10): Kit vs. Chipper as "the vulnerable one".
 // Everything that needs "the vulnerable one" reads this — nothing hard-codes Kit.
 export const VULNERABLE_ID = 'kit';

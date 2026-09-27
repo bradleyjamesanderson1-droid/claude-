@@ -3,7 +3,7 @@
 // stays short and on-screen"). The single exception is Colour, which is only
 // ever changed here and read by presentation code — never displayed.
 
-import { BALANCE } from '../config.js';
+import { BALANCE, SAVE_VERSION } from '../config.js';
 import { COMPANIONS, BERRY_TYPES } from '../data/companions.js';
 
 export const STATUS = {
@@ -15,7 +15,7 @@ export const STATUS = {
 
 export function newGame() {
   const state = {
-    version: 1,
+    version: SAVE_VERSION,
     phase: 'coldopen',
     landmark: 0,
     step: 0,
@@ -244,6 +244,6 @@ export function serialize(state) {
 
 export function deserialize(json) {
   const s = JSON.parse(json);
-  if (!s || s.version !== 1 || !s.party || !s.party.rusty) throw new Error('Unrecognised save');
+  if (!s || s.version !== SAVE_VERSION || !s.party || !s.party.rusty) throw new Error('Unrecognised save');
   return s;
 }

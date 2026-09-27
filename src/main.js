@@ -16,6 +16,8 @@ import HollowScene from './scenes/HollowScene.js';
 import ReceiptScene from './scenes/ReceiptScene.js';
 import GameOverScene from './scenes/GameOverScene.js';
 import EndingScene from './scenes/EndingScene.js';
+import ChapterSelectScene from './scenes/ChapterSelectScene.js';
+import FeedbackScene from './scenes/FeedbackScene.js';
 import ForageScene from './encounters/ForageScene.js';
 import ChaseScene from './encounters/ChaseScene.js';
 import SkirmishScene from './encounters/SkirmishScene.js';
@@ -54,6 +56,8 @@ async function start() {
       ReceiptScene,
       GameOverScene,
       EndingScene,
+      ChapterSelectScene,
+      FeedbackScene,
       ForageScene,
       ChaseScene,
       SkirmishScene,

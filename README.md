@@ -17,6 +17,21 @@ node scripts/playthrough.mjs rootvein  # headless: full run through the Director
 node scripts/playthrough.mjs refuse    # ...and the refuse-Rootvein ending
 ```
 
+## Test builds and deployment
+
+- **Hosting:** `.github/workflows/deploy.yml` runs the tests, builds, and publishes to GitHub Pages on
+  every push to `main`. You can also run it by hand from the Actions tab. One-time setup: repo **Settings →
+  Pages → Source: GitHub Actions**. A private repo needs a paid GitHub plan for Pages; otherwise make the repo public.
+- **Version:** the title screen shows `v<package.json version> (<commit>)`. Bump `version` in
+  `package.json` for each round of testing.
+- **Chapter select:** on while `TEST_BUILD = true` in `src/config.js`. Set it to `false` for a public launch.
+- **Feedback:** the button on the title, game-over and ending screens builds a report (build, chapter,
+  party, device). Point it somewhere with `FEEDBACK` in `src/config.js`: a form `url` or an `email`.
+  Left empty, testers get Copy and their device's Share sheet.
+- **Saves:** bump `SAVE_VERSION` in `src/config.js` when a change would break older saves. Testers then
+  see a clear "older build" message instead of a broken run.
+- **Tester notes:** `public/testers.html`, served at `<site>/testers.html` and linked from the title screen.
+
 ## Controls
 
 | Action | Keyboard | Touch |

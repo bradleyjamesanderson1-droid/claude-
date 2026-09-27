@@ -23,6 +23,26 @@ export function save() {
   }
 }
 
+/** 'none' | 'ok' | 'stale' (a save from an older, incompatible build). */
+export function saveStatus() {
+  try {
+    const raw = localStorage.getItem(SAVE_KEY);
+    if (!raw) return 'none';
+    deserialize(raw);
+    return 'ok';
+  } catch {
+    return 'stale';
+  }
+}
+
+/** Swap in a whole state (chapter select). Saves and checkpoints it. */
+export function replaceState(s) {
+  state = s;
+  save();
+  checkpoint();
+  return state;
+}
+
 export function hasSave() {
   try {
     const raw = localStorage.getItem(SAVE_KEY);

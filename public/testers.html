@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tester Notes · The Woodland Rebellion</title>
+    <style>
+      :root {
+        --bg: #1a1410;
+        --panel: #241c18;
+        --ink: #f4efe1;
+        --dim: #b8ab96;
+        --gold: #ffd060;
+        --line: #4a3c30;
+        --warn: #ff9a70;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      }
+      main { max-width: 680px; margin: 0 auto; padding: 28px 16px 64px; }
+      h1 { color: var(--gold); font-size: 1.6rem; line-height: 1.25; margin: 0 0 4px; }
+      .sub { color: var(--dim); margin: 0 0 28px; }
+      h2 {
+        font-size: 1.05rem;
+        color: var(--gold);
+        margin: 32px 0 10px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--line);
+      }
+      p, li { color: var(--ink); }
+      ul, ol { padding-left: 22px; }
+      li { margin: 6px 0; }
+      .note {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-left: 3px solid var(--warn);
+        padding: 12px 14px;
+        border-radius: 4px;
+        margin: 16px 0;
+      }
+      table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+      th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      th { color: var(--dim); font-weight: 600; }
+      kbd {
+        font: 0.85rem ui-monospace, monospace;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 3px;
+        padding: 1px 5px;
+      }
+      a { color: var(--gold); }
+      .play {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 10px 18px;
+        background: var(--panel);
+        border: 2px solid #e8d8b0;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>The Woodland Rebellion: tester notes</h1>
+      <p class="sub">V1 test build · Acts I–II (Ch. 2–12)</p>
+
+      <p>
+        Thanks for playing. It's an Oregon Trail-style journey with short 8-bit side-scrolling scenes in
+        between. You travel, manage stamina and food, and get through a handful of chases, forages and
+        fights. It plays on a phone or a computer.
+      </p>
+      <a class="play" href="./">▶ Play the game</a>
+
+      <div class="note">
+        <strong>This is an early test.</strong> All the art is placeholder, and the dialogue is a draft.
+        Please judge how it <em>plays</em>, not how it looks or reads.
+      </div>
+
+      <h2>What we'd love you to try</h2>
+      <ol>
+        <li><strong>Play from the start</strong> ("New journey") as far as you can, ideally to an ending.</li>
+        <li>
+          <strong>Reach Chapter 12 and see both endings.</strong> Something is offered to you in the
+          final fight, and you can take it or refuse it. The second ending needs chapter select or a
+          replay, and it's easy to miss, so please try it.
+        </li>
+        <li>
+          <strong>Watch your stamina.</strong> Tell us if you ever felt the game cheated you, or if you
+          ran out of food and didn't understand why.
+        </li>
+        <li><strong>On a phone:</strong> check whether the touch buttons feel OK and the text is readable.</li>
+      </ol>
+
+      <h2>Controls</h2>
+      <table>
+        <tr><th>Action</th><th>Keyboard</th><th>Phone</th></tr>
+        <tr><td>Move</td><td><kbd>←</kbd> <kbd>→</kbd> or <kbd>A</kbd> <kbd>D</kbd></td><td>◀ ▶ buttons</td></tr>
+        <tr><td>Jump</td><td><kbd>↑</kbd> <kbd>W</kbd> <kbd>Space</kbd></td><td>JMP</td></tr>
+        <tr><td>Staff (knocks back, never kills)</td><td><kbd>J</kbd> or <kbd>Z</kbd></td><td>STF</td></tr>
+        <tr><td>Fleet berry (speed)</td><td><kbd>K</kbd> or <kbd>X</kbd></td><td>FLT</td></tr>
+        <tr><td>Nimble berry (jump, dodge)</td><td><kbd>L</kbd> or <kbd>C</kbd></td><td>NMB</td></tr>
+        <tr><td>Act (open a cage)</td><td><kbd>E</kbd> or <kbd>↓</kbd></td><td>ACT</td></tr>
+        <tr><td>Pause</td><td><kbd>P</kbd> or <kbd>Esc</kbd></td><td>—</td></tr>
+        <tr><td>Menus and dialogue</td><td>arrows + <kbd>Enter</kbd></td><td>tap</td></tr>
+        <tr><td>Sound on/off</td><td><kbd>M</kbd> on the title</td><td>SOUND at top right of the title</td></tr>
+      </table>
+      <p>
+        On a phone, hold it <strong>upright</strong> for the trail and story, and <strong>sideways</strong>
+        for the action scenes. The game will prompt you. On iPhone, sound won't play if the silent switch is on.
+      </p>
+
+      <h2>Chapter select</h2>
+      <p>
+        On the title screen, <strong>Chapter select</strong> jumps straight to any of the 11 chapters,
+        with a typical party, food and berries for that point. Use it to retry a part or reach the
+        ending quickly. It replaces your current save, and it asks you first.
+      </p>
+
+      <h2>Saves</h2>
+      <p>
+        The game saves automatically in your browser, and <strong>Continue</strong> picks up where you left off.
+        Saves stay on that device and in that browser. They're lost in private browsing, or if you clear site data.
+      </p>
+      <div class="note">
+        <strong>Saves may reset between test builds.</strong> If we change something that older saves can't
+        handle, the title screen will tell you your save is from an older build. Then start a new journey,
+        or use chapter select to get back to where you were.
+      </div>
+
+      <h2>Sending feedback</h2>
+      <p>
+        Use the <strong>Feedback</strong> button on the title screen, the game-over screen or an ending.
+        It attaches the build number, where you are and your device, so you only need to say what
+        happened. Useful things to tell us:
+      </p>
+      <ul>
+        <li>Anything that broke, froze, or looked wrong.</li>
+        <li>Anywhere you were stuck or didn't know what to do.</li>
+        <li>Anything too hard, too easy, or boring.</li>
+        <li>Which ending you got, and how it made you feel.</li>
+      </ul>
+      <p>The build number is shown at the bottom of the title screen (for example <code>v0.1.0 (abc1234)</code>).</p>
+    </main>
+  </body>
+</html>

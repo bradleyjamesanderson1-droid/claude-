@@ -162,3 +162,22 @@ test('every music track parses into valid notes and drums', async () => {
   }
   assert.equal(Math.round(noteFreq('A4')), 440);
 });
+
+test('chapter select builds a sensible arrival state for every landmark', async () => {
+  const { stateAtLandmark } = await import('../src/state/testStart.js');
+  for (let n = 0; n < LANDMARKS.length; n++) {
+    const s = stateAtLandmark(n);
+    assert.equal(s.landmark, n);
+    assert.equal(s.step, 0);
+    assert.equal(s.colour, 1);
+    assert.ok(s.food > 0);
+    // Round-trips through the save format.
+    assert.deepEqual(deserialize(serialize(s)), s);
+  }
+  assert.deepEqual(Object.keys(stateAtLandmark(4).party), ['rusty']); // they join during Ch. 6
+  assert.ok(stateAtLandmark(5).party.chip);
+  assert.ok(!stateAtLandmark(9).party.bandit); // joins during Ch. 11
+  assert.ok(stateAtLandmark(10).party.bandit);
+  assert.ok(!stateAtLandmark(3).flags.berrycraft);
+  assert.ok(stateAtLandmark(4).flags.berrycraft);
+});
