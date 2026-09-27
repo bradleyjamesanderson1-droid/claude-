@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#120e0c" />
+    <title>The Woodland Rebellion</title>
+    <style>
+      html, body { margin: 0; height: 100%; background: #120e0c; overflow: hidden; touch-action: none; }
+      #game { position: fixed; inset: 0; }
+      canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
+      #rotate {
+        position: fixed; inset: 0; display: none; z-index: 10; background: rgba(18, 14, 12, 0.94);
+        color: #f4efe1; font: 10px/1.8 'Press Start 2P', monospace; text-align: center;
+        flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px;
+      }
+      #rotate .icon { font-size: 28px; }
+      #rotate button {
+        font: inherit; color: #f4efe1; background: #2b2420; border: 2px solid #e8d8b0; padding: 10px 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div id="rotate">
+      <div class="icon">&#8635;</div>
+      <div class="msg">Turn your phone sideways for this part.</div>
+      <button type="button">Play anyway</button>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
