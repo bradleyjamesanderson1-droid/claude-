@@ -30,7 +30,9 @@ file behind in `agency/workflows/<slug>/`, so work can pause and pick up in any 
    - Stage 3: there must be a priced pilot with a success metric agreed *before* building.
      "Don't spend 3 weeks building something nobody agreed to buy."
    - Stage 5: the build must have passed the red-team pass before any case study is written.
-4. **End every run** by telling the user the stage just finished, the gate result and the
+4. **Hand off on a signature.** When a prospect agrees to the audit or pilot, stop here and
+   run `service-delivery` to open `agency/clients/<slug>/`.
+5. **End every run** by telling the user the stage just finished, the gate result and the
    single next action (usually one conversation with a real prospect).
 
 ## Workflow README template
