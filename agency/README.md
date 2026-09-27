@@ -40,3 +40,20 @@ prompts) and the agents that do the service work in concierge/demo mode:
 
 Each client needs a `facts.md` (template: `clients/_facts-template.md`). The working agents
 only state what's in it.
+
+## Winning clients: the outreach engine
+
+`/outreach-engine` runs your own prospecting, nightly if scheduled:
+research → three-line emails as **Gmail drafts** (max 20/day, you send) → sort every reply →
+book the call (never send the price) → brief before each call.
+
+| Piece | Skill | Agent |
+|---|---|---|
+| Write (three lines max) | `/write-cold-email` | `cold-email-writer` |
+| Sort every reply | `/sort-replies` | `reply-sorter` |
+| Book the call | `/book-the-call` | `reply-sorter`, `call-prep` |
+| Research prospects | (from `service-outbound-research`) | `prospect-researcher` (research-only mode) |
+
+The agents are given Gmail's **draft** tool but not its send or reply tools, so nothing goes out
+without you. Fill in `facts.md` first: the run stops if `compliance_rule` is empty.
+The pipeline lives in a Notion database, **Outreach Pipeline**, created during setup.
