@@ -117,8 +117,8 @@ export class InfoPanel {
     );
 
     this.input.value = "";
+    this.renderChat(false);
     this.scroller.scrollTop = 0;
-    this.renderChat();
   }
 
   close() {
@@ -138,7 +138,7 @@ export class InfoPanel {
     void this.store.ask(id, text);
   }
 
-  private renderChat() {
+  private renderChat(autoScroll = true) {
     const body = this.body;
     if (!body) return;
     const convo = this.store.get(body.id);
@@ -152,7 +152,7 @@ export class InfoPanel {
 
     const nearBottom = this.scroller.scrollHeight - this.scroller.scrollTop - this.scroller.clientHeight < 80;
     this.log.replaceChildren(...convo.items.map((m) => renderItem(m)));
-    if (nearBottom || convo.pending) this.scroller.scrollTop = this.scroller.scrollHeight;
+    if (autoScroll && convo.items.length && (nearBottom || convo.pending)) this.scroller.scrollTop = this.scroller.scrollHeight;
 
     // Chips: suggested questions not yet asked.
     const asked = new Set(convo.items.filter((i) => i.role === "user").map((i) => i.text));

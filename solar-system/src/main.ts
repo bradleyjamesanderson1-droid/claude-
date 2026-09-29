@@ -38,7 +38,7 @@ scene.add(system.root);
 scene.add(createStarfield());
 const sunLight = new THREE.PointLight(0xffffff, 3.2, 0, 0);
 scene.add(sunLight);
-scene.add(new THREE.AmbientLight(0x6070a0, 0.12));
+scene.add(new THREE.AmbientLight(0x6070a0, 0.22));
 
 const asteroids = new Belt(S.ASTEROID_BELT, "#9c8f7e", 1.6, 0.55, 3);
 const kuiper = new Belt(S.KUIPER_BELT, "#8aa0c8", 1.4, 0.3, 5);

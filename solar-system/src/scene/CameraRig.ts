@@ -99,7 +99,7 @@ export class CameraRig {
 
   private flightGoal(node: BodyNode | null): { target: THREE.Vector3; dist: number } {
     if (!node) return { target: new THREE.Vector3(), dist: this.systemViewDistance() };
-    return { target: node.worldPos.clone(), dist: this.system.focusDistance(node) };
+    return { target: node.worldPos.clone(), dist: this.focusDistance(node) };
   }
 
   private finishFlight(arrived: boolean) {
@@ -110,7 +110,7 @@ export class CameraRig {
     this.follow = f.node;
     if (f.node) {
       this.lastFollowPos.copy(f.node.worldPos);
-      this.lastFocusDist = this.system.focusDistance(f.node);
+      this.lastFocusDist = this.focusDistance(f.node);
       if (!arrived) {
         // Interrupted mid-flight: re-centre on the body, keeping the current camera distance.
         const off = this.camera.position.clone().sub(this.controls.target);
@@ -148,7 +148,7 @@ export class CameraRig {
       this.camera.position.add(delta);
       this.controls.target.add(delta);
       this.lastFollowPos.copy(n.worldPos);
-      const fd = this.system.focusDistance(n);
+      const fd = this.focusDistance(n);
       if (this.lastFocusDist > 0 && Math.abs(fd / this.lastFocusDist - 1) > 1e-6) {
         const off = this.camera.position.clone().sub(this.controls.target).multiplyScalar(fd / this.lastFocusDist);
         this.camera.position.copy(this.controls.target).add(off);
@@ -157,6 +157,13 @@ export class CameraRig {
     }
     this.updateLimits();
     this.controls.update();
+  }
+
+  /** Framing distance, backed off on portrait screens so the body fits the narrow width. */
+  private focusDistance(n: BodyNode): number {
+    const vHalf = Math.tan(THREE.MathUtils.degToRad(this.camera.fov / 2));
+    const hHalf = vHalf * this.camera.aspect;
+    return this.system.focusDistance(n) * Math.max(1, (vHalf / hHalf) * 0.8);
   }
 
   private updateLimits() {

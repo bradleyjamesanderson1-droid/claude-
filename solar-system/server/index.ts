@@ -2,6 +2,7 @@
  * Small server: serves the app (Vite middleware in dev, dist/ in production)
  * and proxies chat to the Anthropic API so the key never reaches the browser.
  */
+import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import express, { type Request, type Response } from "express";
@@ -130,16 +131,18 @@ app.use("/api", (_req, res) => {
   res.status(404).json({ code: "not_found", message: "Not found." });
 });
 
+const httpServer = http.createServer(app);
+
 if (isProd) {
   const dist = path.join(root, "dist");
   app.use(express.static(dist, { index: "index.html", maxAge: "1h" }));
 } else {
   const { createServer } = await import("vite");
-  const vite = await createServer({ root, server: { middlewareMode: true }, appType: "spa" });
+  const vite = await createServer({ root, server: { middlewareMode: true, hmr: { server: httpServer } }, appType: "spa" });
   app.use(vite.middlewares);
 }
 
-app.listen(port, () => {
+httpServer.listen(port, () => {
   console.log(`Solar System Explorer on http://localhost:${port}`);
   console.log(
     chatEnabled

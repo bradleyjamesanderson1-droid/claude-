@@ -24,7 +24,7 @@ export interface BodyNode {
   anchor: THREE.Group;
   tilt: THREE.Group;
   mesh: THREE.Mesh<THREE.SphereGeometry, THREE.MeshStandardMaterial | THREE.MeshBasicMaterial>;
-  rings?: THREE.Mesh<THREE.RingGeometry, THREE.MeshLambertMaterial>;
+  rings?: THREE.Mesh<THREE.RingGeometry, THREE.MeshBasicMaterial>;
   orbitLine?: THREE.LineLoop<THREE.BufferGeometry, THREE.LineBasicMaterial>;
   compressed: { radius: number; orbit: number };
   real: { radius: number; orbit: number };
@@ -174,8 +174,10 @@ export class SolarSystem {
       }
       g.rotateX(-Math.PI / 2);
       const tex = makeRingTexture(body.id === "saturn" ? "saturn" : "uranus");
-      const m = new THREE.MeshLambertMaterial({
+      // Unlit: real rings scatter sunlight through themselves, so they shouldn't go black from the far side.
+      const m = new THREE.MeshBasicMaterial({
         map: tex,
+        color: 0xd8d8d8,
         transparent: true,
         side: THREE.DoubleSide,
         depthWrite: false,
