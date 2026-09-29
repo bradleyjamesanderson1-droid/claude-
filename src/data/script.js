@@ -63,7 +63,7 @@ export const SCRIPTS = {
     { t: 'Lanterns in the branches. Everyone busy.' },
     { s: 'elder', t: "Rusty! The feast table's short. Fetch what you can before the sun's high." },
     { s: 'rusty', t: "On it. Berries, nuts, anything that isn't moving." },
-    { t: 'Arrow keys / A-D to move. Up, W or Space to jump. On a phone, use the buttons.' },
+    { t: 'Arrow keys / A-D to move. Up, W or Space to jump. Down or S to duck. On a phone, use the buttons.' },
   ],
   ch2_feast: [
     { bg: 'grove' },
@@ -104,7 +104,7 @@ export const SCRIPTS = {
     { s: 'friend', t: "Go! You're faster than me. GO!" },
     { fx: 'shake' },
     { t: `They take ${FRIEND_NAME}. Rusty runs.` },
-    { t: 'Jump the roots. Duck the swoops. You cannot fight them — just get clear.' },
+    { t: 'Jump the roots (Up). Duck the swoops (Down). Stay out of the shadows. You cannot fight them — just get clear.' },
   ],
   ch4_after: [
     { bg: 'forest' },

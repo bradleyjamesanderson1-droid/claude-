@@ -37,6 +37,7 @@ export default class EncounterBase extends Phaser.Scene {
     this.knocks = 0;
     this.engaged = false;
     this.hurtAnim = 0;
+    this.ducking = false;
     this.attackAnim = 0;
     this.startStamina = {};
     for (const [id, m] of Object.entries(this.state.party)) this.startStamina[id] = m.stamina;
@@ -221,11 +222,17 @@ export default class EncounterBase extends Phaser.Scene {
     this.onStaff?.(zone, dir, this.staffPower());
   }
 
+  /** Rusty's physics body as a rectangle: hits are judged on this, not the sprite. */
+  playerRect() {
+    const b = this.player.body;
+    return new Phaser.Geom.Rectangle(b.x, b.y, b.width, b.height);
+  }
+
   updatePlayer(dt) {
     const c = this.controls;
     const p = this.player;
     const onGround = p.body.blocked.down || p.body.touching.down;
-    let speed = 80;
+    let speed = 100;
     if (this.has('fleet')) speed *= BALANCE.skirmish.fleetSpeedMult;
     if (this.stacked()) speed *= 1.25;
     if (this.rootveinActive) speed *= 1.4;
@@ -239,8 +246,17 @@ export default class EncounterBase extends Phaser.Scene {
         p.setFlipX(false);
       } else p.setVelocityX(p.body.velocity.x * 0.7);
     }
-    if (c.justDown('jump') && onGround) {
-      let jv = -250;
+    // Duck: crouch low under swoops. Shrinks the body so a head-height attack
+    // passes over. Can't duck in the air, and moving while crouched is slower.
+    const wantDuck = c.isDown('duck') && onGround && !this.ended;
+    if (wantDuck !== !!this.ducking) {
+      this.ducking = wantDuck;
+      if (wantDuck) p.body.setSize(10, 7).setOffset(3, 9);
+      else p.body.setSize(10, 14).setOffset(3, 2);
+    }
+    if (this.ducking) p.setVelocityX(p.body.velocity.x * 0.5);
+    if (c.justDown('jump') && onGround && !this.ducking) {
+      let jv = -300;
       if (this.has('nimble')) jv *= BALANCE.skirmish.nimbleJumpMult;
       p.setVelocityY(jv);
       sfx('jump');
@@ -257,7 +273,7 @@ export default class EncounterBase extends Phaser.Scene {
     else p.setAlpha(1);
 
     if (this.hurtAnim <= 0 && this.attackAnim <= 0 && !this.ended) {
-      const anim = !onGround ? 'rusty-jump' : Math.abs(p.body.velocity.x) > 10 ? 'rusty-run' : 'rusty-idle';
+      const anim = this.ducking ? 'rusty-duck' : !onGround ? 'rusty-jump' : Math.abs(p.body.velocity.x) > 10 ? 'rusty-run' : 'rusty-idle';
       if (p.anims.currentAnim?.key !== anim) p.play(anim);
     }
   }

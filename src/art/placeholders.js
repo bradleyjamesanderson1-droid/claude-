@@ -46,9 +46,11 @@ function drawMammal(p, spec, f) {
 
   const eating = FRAME_LAYOUT.eat.includes(f);
   const jumping = f === FRAME_LAYOUT.jump[0];
-  const by = 10 + bob - (jumping ? 1 : 0) + (sz < 0 ? 1 : 0);
+  const ducking = f === FRAME_LAYOUT.duck?.[0];
+  const crouch = ducking ? 3 : 0;
+  const by = 10 + bob + crouch - (jumping ? 1 : 0) + (sz < 0 ? 1 : 0);
   const hx = 11 + sz + (f === FRAME_LAYOUT.attack[0] ? 1 : 0);
-  const hy = (eating ? 7 : 6) + bob + (sz < 0 ? 2 : 0) - (sz > 0 ? 1 : 0);
+  const hy = (eating ? 7 : 6) + bob + crouch * 2 + (sz < 0 ? 2 : 0) - (sz > 0 ? 1 : 0);
 
   // tail (behind body)
   const tc = spec.body;
