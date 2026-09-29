@@ -1,0 +1,29 @@
+# Type-checks, tests and builds the Solar System Explorer (solar-system/).
+name: Solar System Explorer CI
+
+on:
+  push:
+    paths: ["solar-system/**", ".github/workflows/solar-system.yml"]
+  pull_request:
+    paths: ["solar-system/**", ".github/workflows/solar-system.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: solar-system
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: solar-system/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

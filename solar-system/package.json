@@ -1,0 +1,31 @@
+{
+  "name": "solar-system-explorer",
+  "version": "0.1.0",
+  "description": "Interactive 3D Solar System explorer with a Claude-powered guide",
+  "scripts": {
+    "dev": "tsx watch --clear-screen=false --include server server/index.ts",
+    "build": "vite build",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "typecheck": "tsc -p .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.129.0",
+    "express": "^5.2.1",
+    "three": "^0.186.1",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.3",
+    "@types/three": "^0.186.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  }
+}
