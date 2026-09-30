@@ -68,7 +68,12 @@ let viewH = 1;
 const chat = new ChatStore();
 const panel = new InfoPanel(chat, (id) => select(id), () => backToSystem());
 const list = new BodyList((id) => select(id, true));
-fetchHealth().then((h) => panel.setHealth(h));
+// Static builds (e.g. GitHub Pages) have no server, so they ship with chat switched off: VITE_CHAT=off.
+if (import.meta.env.VITE_CHAT === "off") {
+  document.querySelector<HTMLElement>(".chat")!.hidden = true;
+} else {
+  fetchHealth().then((h) => panel.setHealth(h));
+}
 
 function select(id: string, fromKeyboard = false) {
   const node = system.byId.get(id);

@@ -34,6 +34,14 @@ explains that chat isn't set up.
 | `npm test` | Unit tests: scale sanity checks, body data, chat validation, SSE parsing |
 | `npm run typecheck` | TypeScript strict-mode check |
 
+## Deploying
+
+The repo's GitHub Pages workflow (`.github/workflows/deploy.yml`) builds this app on every
+push to `main` and publishes it at `<pages-site>/solar-system/`, next to the game.
+Pages is static hosting with no server, so that build sets `VITE_CHAT=off` and the
+"Ask the guide" section is hidden. To launch with chat, run it on a Node host
+(`npm run build && npm start`) with `ANTHROPIC_API_KEY` set in the host's environment.
+
 ## Environment
 
 Set these in `.env`. The file is git-ignored; `.env.example` documents them.
