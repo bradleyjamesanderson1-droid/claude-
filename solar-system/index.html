@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Fly around an interactive 3D Solar System, click any world for facts, and ask a guide follow-up questions." />
+    <meta name="theme-color" content="#05070d" />
+    <title>Solar System Explorer</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='7' fill='%23ffc94d'/%3E%3Cellipse cx='16' cy='16' rx='14' ry='5' fill='none' stroke='%239fb8ff' stroke-width='1.5'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="scene" aria-label="3D view of the Solar System. Use the Bodies menu to choose a world." role="img"></canvas>
+      <div id="reticles" aria-hidden="true">
+        <div class="reticle reticle-hover" hidden></div>
+        <div class="reticle reticle-selected" hidden></div>
+      </div>
+      <div id="labels" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <button id="menu-btn" class="btn" aria-controls="drawer" aria-expanded="false">
+          <span aria-hidden="true">☰</span> Bodies
+        </button>
+        <button id="back-btn" class="btn" title="Back to the whole system (Esc)">⟲ System</button>
+        <div class="spacer"></div>
+        <div class="seg" role="group" aria-label="Time speed" id="time-controls"></div>
+        <div class="seg" role="group" aria-label="View options">
+          <button class="btn toggle" id="orbits-btn" aria-pressed="true" title="Show orbit lines">Orbits</button>
+          <button class="btn toggle" id="labels-btn" aria-pressed="true" title="Show labels">Labels</button>
+          <button class="btn toggle" id="scale-btn" aria-pressed="false" title="Show real sizes and distances">True scale</button>
+        </div>
+      </header>
+
+      <div id="scale-banner" class="banner" hidden role="status">
+        <strong>True scale.</strong> Real sizes and distances. The worlds are drawn as dots here or you couldn't see them at all. Orbital speeds are still sped up.
+      </div>
+
+      <nav id="drawer" class="drawer" aria-label="Bodies" hidden>
+        <div class="drawer-head">
+          <label for="search" class="visually-hidden">Search bodies</label>
+          <input id="search" type="search" placeholder="Search… (press /)" autocomplete="off" spellcheck="false" />
+          <button id="drawer-close" class="btn icon" aria-label="Close list">✕</button>
+        </div>
+        <ul id="body-list" class="body-list"></ul>
+      </nav>
+
+      <aside id="panel" class="panel" aria-labelledby="panel-title" hidden>
+        <div class="panel-grip" aria-hidden="true"></div>
+        <div class="panel-head">
+          <div>
+            <h2 id="panel-title"></h2>
+            <p id="panel-sub" class="sub"></p>
+          </div>
+          <button id="panel-close" class="btn icon" aria-label="Close info panel">✕</button>
+        </div>
+        <div class="panel-scroll">
+          <dl id="panel-stats" class="stats"></dl>
+          <section aria-labelledby="facts-h">
+            <h3 id="facts-h">Did you know?</h3>
+            <ul id="panel-facts" class="facts"></ul>
+          </section>
+          <section id="panel-moons-sec" aria-labelledby="moons-h">
+            <h3 id="moons-h">Moons</h3>
+            <div id="panel-moons" class="chips"></div>
+          </section>
+          <section class="chat" aria-labelledby="chat-h">
+            <div class="chat-head">
+              <h3 id="chat-h">Ask the guide</h3>
+              <button id="chat-clear" class="linkish" hidden>Clear chat</button>
+            </div>
+            <p id="chat-unavailable" class="chat-note" hidden></p>
+            <div id="chat-log" class="chat-log" aria-live="polite"></div>
+            <div id="chat-chips" class="chips"></div>
+            <form id="chat-form" class="chat-form">
+              <label for="chat-input" class="visually-hidden">Your question</label>
+              <textarea id="chat-input" rows="2" maxlength="1000" placeholder="Ask anything about this world…"></textarea>
+              <button id="chat-send" class="btn primary" type="submit">Ask</button>
+            </form>
+          </section>
+        </div>
+      </aside>
+
+      <p id="hint" class="hint">Drag to rotate · scroll or pinch to zoom · right-drag to pan · click a world</p>
+      <noscript><p class="banner">This explorer needs JavaScript and WebGL.</p></noscript>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

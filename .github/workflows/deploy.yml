@@ -1,4 +1,5 @@
-# Builds the game and publishes it to GitHub Pages on every push to main.
+# Builds the game (and the Solar System Explorer at /solar-system/) and publishes
+# both to GitHub Pages on every push to main.
 # One-time setup: repo Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
 name: Deploy to GitHub Pages
 
@@ -27,9 +28,24 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            solar-system/package-lock.json
       - run: npm ci
       - run: npm test
       - run: npm run build
+      # Solar System Explorer, served at <site>/solar-system/. Static hosting has no
+      # server for the chat proxy, so it is built with chat switched off.
+      - name: Build Solar System Explorer
+        working-directory: solar-system
+        env:
+          VITE_CHAT: 'off'
+        run: |
+          npm ci
+          npm test
+          npm run build
+          mkdir -p ../dist/solar-system
+          cp -r dist/. ../dist/solar-system/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
