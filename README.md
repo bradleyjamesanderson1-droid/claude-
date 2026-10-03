@@ -15,6 +15,7 @@ npm test           # ledger / data unit tests (node:test)
 node scripts/smoke.mjs                 # headless: every scene, screenshots to ./shots
 node scripts/playthrough.mjs rootvein  # headless: full run through the Director, canon ending
 node scripts/playthrough.mjs refuse    # ...and the refuse-Rootvein ending
+node scripts/chase-bot.mjs              # a bot plays the chase using only on-screen cues; should take 0 hits
 ```
 
 ## Test builds and deployment
@@ -41,7 +42,8 @@ node scripts/playthrough.mjs refuse    # ...and the refuse-Rootvein ending
 | Staff (knock back, never kill) | J / Z | `STF` |
 | Draw Fleet berry | K / X | `FLT` |
 | Draw Nimble berry (draw both = **stack**) | L / C | `NMB` |
-| Act (free the captive) | E / ↓ | `ACT` |
+| Duck (under swoops) | ↓ / S | `DWN` |
+| Act (free the captive) | E | `ACT` |
 | Pause | P / Esc | — |
 | Menus / dialogue | arrows + Enter / Space | tap |
 
@@ -92,8 +94,8 @@ from landmark 5 onward: grey root-lines, dead bushes, spoiled food, thinner find
 All sprites are procedurally drawn placeholders (`src/art/placeholders.js`). The contract
 is in `src/art/manifest.js`:
 
-- one horizontal strip per character, **12 frames of 16×16**
-- frame order: `idle 0-1 · run 2-5 · jump 6 · attack 7 · hurt 8 · down 9 · eat 10-11`
+- one horizontal strip per character, **13 frames of 16×16**
+- frame order: `idle 0-1 · run 2-5 · jump 6 · attack 7 · hurt 8 · down 9 · eat 10-11 · duck 12`
 
 To swap in final art, drop `public/sprites/<key>.png` in the same layout and set
 `file: '<key>.png'` on its manifest entry. No other code changes are needed.

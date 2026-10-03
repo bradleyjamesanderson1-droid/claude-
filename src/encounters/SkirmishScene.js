@@ -110,7 +110,7 @@ export default class SkirmishScene extends EncounterBase {
     this.tutSteps = [
       { text: 'Draw ONE berry before you go in.\n[K] or FLT = Fleet   [L] or NMB = Nimble', done: () => this.activeCount() > 0 },
       { text: 'Watch the bar: the draw cost you, and it keeps\ndraining while the berry works.', done: () => this.tutTimer > 3.5 },
-      { text: 'Staff: [J] or STF. It knocks them back.\nYou do not kill. Break their nerve.', done: () => (this.knocks || 0) >= 2 },
+      { text: 'Staff: [J] or STF knocks them back. No killing.\nRed flash = about to lunge: hit it first, or jump.', done: () => (this.knocks || 0) >= 2 },
       { text: `Reach the pen. Hold [E] or ACT to free ${FRIEND_NAME}.`, done: () => this.freed },
       { text: 'Disengage! Get back to the left edge before\nyou are empty. Winning is getting out.', done: () => false },
     ];

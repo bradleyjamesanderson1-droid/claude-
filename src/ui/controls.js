@@ -10,7 +10,8 @@ const KEYMAP = {
   staff: ['J', 'Z'],
   b1: ['K', 'X'],
   b2: ['L', 'C'],
-  act: ['E', 'DOWN', 'S'],
+  act: ['E'],
+  duck: ['DOWN', 'S'],
 };
 
 export function isTouchDevice(scene) {
@@ -57,6 +58,7 @@ export class Controls {
     const B = 30;
     mk('left', 22, H - 22, B, B, '<');
     mk('right', 58, H - 22, B, B, '>');
+    mk('duck', 40, H - 56, B, B, 'DWN');
     mk('jump', W - 22, H - 22, B, B, 'JMP');
     mk('staff', W - 58, H - 22, B, B, 'STF');
     if (extra.b1) mk('b1', W - 94, H - 22, B, B, extra.b1);

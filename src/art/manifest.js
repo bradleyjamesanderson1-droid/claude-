@@ -6,7 +6,7 @@
 // and set `file: '<key>.png'` on the entry. Nothing else changes.
 
 export const FRAME = 16;
-export const FRAME_COUNT = 12;
+export const FRAME_COUNT = 13;
 
 // index -> meaning. Final art must keep this order.
 export const FRAME_LAYOUT = {
@@ -17,6 +17,7 @@ export const FRAME_LAYOUT = {
   hurt: [8],
   down: [9], // collapsed
   eat: [10, 11],
+  duck: [12], // crouched low (dodging swoops)
 };
 
 export const ANIMS = {
@@ -27,6 +28,7 @@ export const ANIMS = {
   hurt: { rate: 1, repeat: 0 },
   down: { rate: 1, repeat: 0 },
   eat: { rate: 5, repeat: -1 },
+  duck: { rate: 1, repeat: 0 },
 };
 
 // Placeholder specs: colour + silhouette hints only. Species are deliberately
