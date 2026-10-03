@@ -162,6 +162,15 @@ canvas.addEventListener("pointerup", (e) => {
 });
 canvas.addEventListener("wheel", () => $("hint").classList.add("gone"), { passive: true });
 
+// Touchpad pinches arrive as ctrl+wheel. Over the canvas the camera controls use them to
+// zoom the view; anywhere else (panel, top bar) the browser would pinch-zoom the whole
+// page instead, pushing the panel and the focused body off screen. Keyboard page zoom
+// (Ctrl +/-) still works. Safari's equivalent is the gesture* events.
+window.addEventListener("wheel", (e) => e.ctrlKey && e.preventDefault(), { passive: false });
+for (const type of ["gesturestart", "gesturechange"]) {
+  document.addEventListener(type, (e) => e.preventDefault(), { passive: false });
+}
+
 // ---------------------------------------------------------------------------
 // Resize
 // ---------------------------------------------------------------------------
